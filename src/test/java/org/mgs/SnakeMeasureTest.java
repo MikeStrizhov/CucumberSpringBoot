@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.Assert.assertEquals;
 
-public class SnakeMeasureTest extends CucumberStepDefinitions {
+public class SnakeMeasureTest  {
     @Autowired
     SnakeController snake;
     @Given("^I have hungry snake")
