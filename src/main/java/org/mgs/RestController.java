@@ -2,6 +2,8 @@ package org.mgs;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -13,8 +15,14 @@ public class RestController {
 
     protected Logger log = LoggerFactory.getLogger(this.getClass());
 
-    ResponseEntity<String> responce;
-    RestTemplate restTemplate = new RestTemplate();
+    public ResponseEntity<String> responce;
+    private RestTemplate restTemplate;
+    //private RestTemplate restTemplate = new RestTemplate();
+
+    @Autowired
+    public RestController(RestTemplateBuilder restTemplateBuilder){
+        this.restTemplate = restTemplateBuilder.build();
+    }
 
     public void executeGetByUrl(String url) {
         responce = restTemplate.getForEntity(url, String.class);
