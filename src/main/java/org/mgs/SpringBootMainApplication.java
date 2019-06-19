@@ -6,6 +6,8 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 @SpringBootApplication
 @Configuration
@@ -24,4 +26,7 @@ public class SpringBootMainApplication {
     public CustomRestTemplateCustomizer customRestTemplateCustomizer() {
         return new CustomRestTemplateCustomizer();
     }
+
 }
+
+
