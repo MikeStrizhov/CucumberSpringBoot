@@ -49,8 +49,6 @@ public class FreemarkerController {
         data.forEach(((k,v)->templateData.put(k,v)));
 
         try {
-            //templateData
-
             template = config.getTemplate(templateName);
             //template = config.getTemplate("simple.ftl");
             //Writer out = new OutputStreamWriter(System.out);

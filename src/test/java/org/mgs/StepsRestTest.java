@@ -4,6 +4,8 @@ import cucumber.api.PendingException;
 import cucumber.api.java.ru.Дано;
 import cucumber.api.java.ru.И;
 import cucumber.api.java.ru.То;
+import org.mgs.groovy.ScriptContainer;
+import org.mgs.groovy.UseGroovy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -21,6 +23,8 @@ public class StepsRestTest extends CucumberStepDefinitions {
     @Autowired
     public  DocumentContainer documentContainer;
 
+    @Autowired
+    public ScriptContainer scriptContainer;
     /**
      *Simple step for debug
      */
@@ -51,12 +55,14 @@ public class StepsRestTest extends CucumberStepDefinitions {
         restController.executePopstXMLByUrl(url, requestBody);
     }
 
-    // Freemaker functionality
+    // Freemarker functionality
+//    @UseGroovy
     @Дано("^начинаем формирование XML документа из шаблона \"([^\"]*)\" с использованием данных:$")
     public void startCreateXmlDocFromFreemarkerTemplate(String templateName, Map<String, String> data) throws Throwable {
         freemarkerController.startCreateXmlDocFromTemplate(templateName, data);
     }
 
+    @UseGroovy
     @И("^заполняем элемент шаблона типа список с именем \"([^\"]*)\" данными:$")
     public void fillListInFreemarkerTemplate(String name, List<String> values) throws Throwable {
         freemarkerController.fillList(name, values);
@@ -66,5 +72,12 @@ public class StepsRestTest extends CucumberStepDefinitions {
     public void createXmlDocFromFreemarkerTemplate(String name) throws Throwable {
         String result = freemarkerController.createXmlDoc();
         documentContainer.put(name, result);
+    }
+
+    //Groovy functionality
+    @Дано("^сохраняем Groovy скрипт с именем \"([^\"]*)\":$")
+    public void saveGroovyScript(String scriptName, String scriptBody) throws Throwable {
+        scriptContainer.addScript(scriptName, true, scriptBody);
+//        throw new PendingException();
     }
 }
